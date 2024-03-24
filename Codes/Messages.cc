@@ -1,11 +1,9 @@
 #include <string>
 
-using namespace std;
-
 class Message {
     protected:
-        std::string msg = "";
-        int len = 0;
+        std::string msg;
+        int len;
     public:
         virtual void setMessage(std::string newMsg) {
             msg = newMsg
@@ -21,9 +19,9 @@ class Message {
 
 class Code : Message {
     protected:
-        std::string binary = "";
+        std::string binary;
     public:
-        virtual void setCode()
+        virtual void setCode();
         virtual void errCorrect();
         virtual void getCode();
 };
