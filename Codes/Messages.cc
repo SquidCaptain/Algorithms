@@ -1,5 +1,7 @@
 #include <string>
 
+using namespace std;
+
 class Message {
     protected:
         std::string msg = "";
