@@ -1,27 +1,36 @@
 #include <string>
 
+using namespace std;
+
 class Message {
-    protected:
-        std::string msg;
-        int len;
     public:
-        virtual void setMessage(std::string newMsg) {
-            msg = newMsg
-        };
-        virtual std::string getMessage() {
-            return msg;
-        };
-        virtual int getLength()  {
-            return len;
-        };
-        virtual void operation();
+        string* msg;
+        ~Message() {}
+        virtual void setMessage(string &newMessage) const = 0;
+        virtual string getMessage() const = 0;
 };
 
-class Code : Message {
-    protected:
-        std::string binary;
+class MyMessage : public Message {
     public:
-        virtual void setCode();
-        virtual void errCorrect();
-        virtual void getCode();
+        MyMessage(string &message) {
+            *msg = message;
+        }
+        ~MyMessage() {}
+        void setMessage(string &newMessage) const override {
+            *msg = newMessage;
+        }
+};
+
+class Code : public Message {
+    protected:
+        Message* message_;
+        string binary;
+    public:
+        Code(Message* message) : message_(message) {}
+        void setMessage(string &newMessage) const override {
+            *msg = newMessage;
+        }
+        virtual void setCode() const = 0;
+        virtual void errCorrect() const = 0;
+        virtual void getCode() const = 0;
 };
